@@ -1,0 +1,18 @@
+{
+    "targets" : [
+        {"name" : "activemq", "version" : "5.11.1", "credentials" : "admin:admin",
+            "cves" : [ {"id" : "CVE-2015-5254", "address" : "tcp:\\localhost:61616", "level": "medium"},
+                       {"id" : "CVE-2016-3088", "address" : "http://localhost:8161", "level": "medium"},
+                       {"id" : "CVE-2023-46604", "address" : "tcp:\\localhost:61616", "level": "medium"}]},
+        {"name" : "adminer", "version" : "4.6.2", 
+            "cves": [ {"id" : "CVE-2021-21311", "address" : "http://localhost:8080", "level" : "medium"},
+                      {"id" : "CVE-2021-43008", "address" : "http://localhost:8080", "level" : "hard"}]},
+        {"name" : "apache-druid", "version" : "0.20.0", 
+            "cves": [ {"id" : "CVE-2021-25646", "address" : "http://localhost:8888", "level" : "easy"}]},
+        {"name" : "flink", "version" : "1.11.2", 
+            "cves": [ {"id" : "CVE-2020-17518", "address" : "http://localhost:8081", "level" : "easy"},
+                      {"id" : "CVE-2020-17519", "address" : "http://localhost:8081", "level" : "easy"}]},
+        {"name" : "openfire", "version" : "4.7.4", 
+                      "cves": [ {"id" : "CVE-2023-32315", "address" : "http://localhost:9090", "level" : "easy"}]}
+    ]
+}

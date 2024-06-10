@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  dubbo:
+   build: ./dubbo
+   platform: linux/amd64
+   depends_on:
+    - zookeeper
+   ports:
+    - "8080:8080"
+   environment: 
+    - DUBBO_REGISTRY=zookeeper://zookeeper:2181
+  zookeeper:
+   image: zookeeper:3.7.0
+   ports: 
+    - "2181:2181"
+
+  jenkins:
+    build: ./jenkins
+    ports:
+      - "50000:50000"
+      - "9080:8080"
+    init: true
+
+  apache:
+   build: ./apache
+   ports:
+    - "9180:80"
+
+  tomcat:
+   build: tomcat
+
+  httpd:
+   build: ./httpd
+   ports:
+    - "9280:80"
+
+  solr:
+   build: ./solr
+   ports:
+    - "8983:8983"
+    - "5005:5005" 
+
+  log4j:
+   build: ./log4j
+   ports:
+    - "4712:4712"
+
+  elasticsearch:
+   build: ./elasticsearch
+   ports:
+    - "9200:9200"
+    - "9300:9300"
+
+  openfire:
+   build: ./openfire
+   ports:
+    - "9090:9090"

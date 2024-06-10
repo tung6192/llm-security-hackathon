@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+ druid:
+   build: ./druid
+   ports:
+    - "8888:8888"
+ adminer:
+   build: ./adminer
+   ports:
+    - "8080:80"
+ openfire:
+   build: ./openfire
+   ports:
+    - "9090:9090"
+ activemq:
+   build: ./activemq
+   ports:
+    - "61616:61616"
+    - "8161:8161"
+    - "5005:5005"
+ flink:
+   image: flink:1.11.2-java8
+   platform: linux/x86_64
+   command: jobmanager
+   ports:
+    - "8081:8081"
+    - "6123:6123"
+ banking_app:
+    build: ./demo_app
+    ports:
+      - "8000:8000"
+    command: gunicorn --bind 0.0.0.0:8000 banking_app.app:app

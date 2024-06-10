@@ -1,0 +1,819 @@
+{
+    "errors": [],
+    "interfile_languages_used": [],
+    "paths": {
+        "scanned": [
+            "banking_app/__init__.py",
+            "banking_app/add_balance.py",
+            "banking_app/app.py",
+            "banking_app/config.py",
+            "banking_app/create_admin.py",
+            "banking_app/forms.py",
+            "banking_app/init_db.py",
+            "banking_app/models.py",
+            "banking_app/routes.py",
+            "banking_app/view_db.py"
+        ]
+    },
+    "results": [
+        {
+            "check_id": "python.flask.os.tainted-os-command-stdlib-flask.tainted-os-command-stdlib-flask",
+            "end": {
+                "col": 34,
+                "line": 25,
+                "offset": 810
+            },
+            "extra": {
+                "dataflow_trace": {
+                    "intermediate_vars": [
+                        {
+                            "content": "command",
+                            "location": {
+                                "end": {
+                                    "col": 16,
+                                    "line": 23,
+                                    "offset": 718
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 9,
+                                    "line": 23,
+                                    "offset": 711
+                                }
+                            }
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 34,
+                                    "line": 25,
+                                    "offset": 810
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 27,
+                                    "line": 25,
+                                    "offset": 803
+                                }
+                            },
+                            "command"
+                        ]
+                    ],
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 46,
+                                    "line": 23,
+                                    "offset": 748
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 19,
+                                    "line": 23,
+                                    "offset": 721
+                                }
+                            },
+                            "request.form.get('command')"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS",
+                "fingerprint": "07bec9cc879f1e07de2c3502a396aac8b42767c8d0a89218f09bfb1c827bc1c23f1f1079e65389ba8f1463676798af270fccb0e386468922d0a271d9f4c87a0c_0",
+                "is_ignored": false,
+                "lines": "        output = os.popen(command).read()",
+                "message": "Untrusted input might be injected into a command executed by the application, which can lead to a command injection vulnerability. An attacker can execute arbitrary commands, potentially gaining complete control of the system. To prevent this vulnerability, avoid executing OS commands with user input. If this is unavoidable, validate and sanitize the input, and use safe methods for executing the commands.",
+                "metadata": {
+                    "category": "security",
+                    "confidence": "HIGH",
+                    "cwe": [
+                        "CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+                    ],
+                    "cwe2020-top25": true,
+                    "cwe2021-top25": true,
+                    "cwe2022-top25": true,
+                    "functional-categories": [
+                        "os::sink::os-command-or-thread::commands",
+                        "os::sink::os-command-or-thread::os",
+                        "os::sink::os-command-or-thread::popen2",
+                        "os::sink::os-command-or-thread::stdlib",
+                        "os::sink::os-command-or-thread::stdlib2",
+                        "os::sink::os-command-or-thread::stdlib3",
+                        "os::sink::os-command-or-thread::subprocess",
+                        "web::source::cookie::flask",
+                        "web::source::form-data::flask",
+                        "web::source::form-data::flask-wtf",
+                        "web::source::form-data::wtforms",
+                        "web::source::header::flask",
+                        "web::source::http-body::flask",
+                        "web::source::http-params::flask",
+                        "web::source::url-path-params::flask"
+                    ],
+                    "impact": "HIGH",
+                    "license": "Copyright 2023 Semgrep, Inc.",
+                    "likelihood": "MEDIUM",
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection"
+                    ],
+                    "references": [
+                        "https://docs.python.org/3/library/os.html",
+                        "https://docs.python.org/3/library/subprocess.html#subprocess.Popen",
+                        "https://owasp.org/Top10/A03_2021-Injection",
+                        "https://semgrep.dev/docs/cheat-sheets/python-command-injection/",
+                        "https://stackless.readthedocs.io/en/v2.7.16-slp/library/commands.html"
+                    ],
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "pro_rules",
+                            "r_id": 116524,
+                            "rule_id": "kxUdW6x",
+                            "rv_id": 755469,
+                            "url": "https://semgrep.dev/playground/r/GxTzADd/python.flask.os.tainted-os-command-stdlib-flask.tainted-os-command-stdlib-flask",
+                            "version_id": "GxTzADd"
+                        }
+                    },
+                    "shortlink": "https://sg.run/yyrPk",
+                    "source": "https://semgrep.dev/r/python.flask.os.tainted-os-command-stdlib-flask.tainted-os-command-stdlib-flask",
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "technology": [
+                        "commands",
+                        "flask",
+                        "flask-wtf",
+                        "os",
+                        "popen2",
+                        "stdlib",
+                        "stdlib2",
+                        "stdlib3",
+                        "subprocess",
+                        "web",
+                        "wtforms"
+                    ],
+                    "vulnerability_class": [
+                        "Command Injection"
+                    ]
+                },
+                "metavars": {
+                    "$1": {
+                        "abstract_content": "form",
+                        "end": {
+                            "col": 5,
+                            "line": 1,
+                            "offset": 4
+                        },
+                        "start": {
+                            "col": 1,
+                            "line": 1,
+                            "offset": 0
+                        }
+                    },
+                    "$FUNC": {
+                        "abstract_content": "popen",
+                        "end": {
+                            "col": 26,
+                            "line": 25,
+                            "offset": 802
+                        },
+                        "start": {
+                            "col": 21,
+                            "line": 25,
+                            "offset": 797
+                        }
+                    },
+                    "$PROPERTY": {
+                        "abstract_content": "form",
+                        "end": {
+                            "col": 31,
+                            "line": 23,
+                            "offset": 733
+                        },
+                        "start": {
+                            "col": 27,
+                            "line": 23,
+                            "offset": 729
+                        }
+                    },
+                    "$SINK": {
+                        "abstract_content": "command",
+                        "end": {
+                            "col": 34,
+                            "line": 25,
+                            "offset": 810
+                        },
+                        "propagated_value": {
+                            "svalue_abstract_content": "request.form.get('command')",
+                            "svalue_end": {
+                                "col": 46,
+                                "line": 23,
+                                "offset": 748
+                            },
+                            "svalue_start": {
+                                "col": 19,
+                                "line": 23,
+                                "offset": 721
+                            }
+                        },
+                        "start": {
+                            "col": 27,
+                            "line": 25,
+                            "offset": 803
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "validation_state": "NO_VALIDATOR"
+            },
+            "path": "banking_app/routes.py",
+            "start": {
+                "col": 27,
+                "line": 25,
+                "offset": 803
+            }
+        },
+        {
+            "check_id": "python.flask.db.sqlalchemy-flask.sqlalchemy-flask",
+            "end": {
+                "col": 98,
+                "line": 112,
+                "offset": 4448
+            },
+            "extra": {
+                "dataflow_trace": {
+                    "intermediate_vars": [
+                        {
+                            "content": "username",
+                            "location": {
+                                "end": {
+                                    "col": 17,
+                                    "line": 109,
+                                    "offset": 4253
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 9,
+                                    "line": 109,
+                                    "offset": 4245
+                                }
+                            }
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 98,
+                                    "line": 112,
+                                    "offset": 4448
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 22,
+                                    "line": 112,
+                                    "offset": 4372
+                                }
+                            },
+                            "f\"SELECT * FROM admin WHERE username='{username}' AND password='{password}'\""
+                        ]
+                    ],
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 38,
+                                    "line": 109,
+                                    "offset": 4274
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 20,
+                                    "line": 109,
+                                    "offset": 4256
+                                }
+                            },
+                            "form.username.data"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS",
+                "fingerprint": "12382f06d1057cd899be6999ddc303d05481295d559f4a3d96aeeb0596c1171ef24e668f9c388240664312de13f84ebb8bc6a622b6c30248a80795db4780d7df_0",
+                "is_ignored": false,
+                "lines": "        query = text(f\"SELECT * FROM admin WHERE username='{username}' AND password='{password}'\")",
+                "message": "Untrusted input might be used to build a database query, which can lead to a SQL injection vulnerability. An attacker can execute malicious SQL statements and gain unauthorized access to sensitive data, modify, delete data, or execute arbitrary system commands. Use the SQLAlchemy ORM provided functions to build SQL queries instead to avoid SQL injection.",
+                "metadata": {
+                    "category": "security",
+                    "confidence": "HIGH",
+                    "cwe": [
+                        "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+                    ],
+                    "cwe2020-top25": true,
+                    "cwe2021-top25": true,
+                    "cwe2022-top25": true,
+                    "functional-categories": [
+                        "db::sink::sql-or-nosql-query::sqlalchemy",
+                        "web::source::cookie::flask",
+                        "web::source::form-data::flask",
+                        "web::source::form-data::flask-wtf",
+                        "web::source::form-data::wtforms",
+                        "web::source::header::flask",
+                        "web::source::http-body::flask",
+                        "web::source::http-params::flask",
+                        "web::source::url-path-params::flask"
+                    ],
+                    "impact": "HIGH",
+                    "license": "Copyright 2023 Semgrep, Inc.",
+                    "likelihood": "HIGH",
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection"
+                    ],
+                    "references": [
+                        "https://docs.sqlalchemy.org/en/20/core/sqlelement.html#sqlalchemy.sql.expression.text",
+                        "https://owasp.org/Top10/A03_2021-Injection"
+                    ],
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "pro_rules",
+                            "r_id": 116511,
+                            "rule_id": "6JUvR1p",
+                            "rv_id": 755447,
+                            "url": "https://semgrep.dev/playground/r/bZTzvBX/python.flask.db.sqlalchemy-flask.sqlalchemy-flask",
+                            "version_id": "bZTzvBX"
+                        }
+                    },
+                    "shortlink": "https://sg.run/Kx1Xj",
+                    "source": "https://semgrep.dev/r/python.flask.db.sqlalchemy-flask.sqlalchemy-flask",
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "technology": [
+                        "flask",
+                        "flask-wtf",
+                        "sql",
+                        "sqlalchemy",
+                        "web",
+                        "wtforms"
+                    ],
+                    "vulnerability_class": [
+                        "SQL Injection"
+                    ]
+                },
+                "metavars": {
+                    "$1": {
+                        "abstract_content": "route",
+                        "end": {
+                            "col": 6,
+                            "line": 1,
+                            "offset": 5
+                        },
+                        "start": {
+                            "col": 1,
+                            "line": 1,
+                            "offset": 0
+                        }
+                    },
+                    "$APP": {
+                        "abstract_content": "Blueprint('main'__name__)",
+                        "end": {
+                            "col": 38,
+                            "line": 9,
+                            "offset": 354
+                        },
+                        "start": {
+                            "col": 11,
+                            "line": 9,
+                            "offset": 327
+                        }
+                    },
+                    "$FIELD": {
+                        "abstract_content": "username",
+                        "end": {
+                            "col": 33,
+                            "line": 109,
+                            "offset": 4269
+                        },
+                        "start": {
+                            "col": 25,
+                            "line": 109,
+                            "offset": 4261
+                        }
+                    },
+                    "$FORM": {
+                        "abstract_content": "form",
+                        "end": {
+                            "col": 24,
+                            "line": 109,
+                            "offset": 4260
+                        },
+                        "propagated_value": {
+                            "svalue_abstract_content": "AdminLoginForm()",
+                            "svalue_end": {
+                                "col": 28,
+                                "line": 107,
+                                "offset": 4202
+                            },
+                            "svalue_start": {
+                                "col": 12,
+                                "line": 107,
+                                "offset": 4186
+                            }
+                        },
+                        "start": {
+                            "col": 20,
+                            "line": 109,
+                            "offset": 4256
+                        }
+                    },
+                    "$FORMCLASS": {
+                        "abstract_content": "AdminLoginForm",
+                        "end": {
+                            "col": 26,
+                            "line": 107,
+                            "offset": 4200
+                        },
+                        "start": {
+                            "col": 12,
+                            "line": 107,
+                            "offset": 4186
+                        }
+                    },
+                    "$FUNC": {
+                        "abstract_content": "admin_login",
+                        "end": {
+                            "col": 16,
+                            "line": 106,
+                            "offset": 4171
+                        },
+                        "start": {
+                            "col": 5,
+                            "line": 106,
+                            "offset": 4160
+                        }
+                    },
+                    "$ROUTE": {
+                        "abstract_content": "route",
+                        "end": {
+                            "col": 15,
+                            "line": 105,
+                            "offset": 4114
+                        },
+                        "start": {
+                            "col": 10,
+                            "line": 105,
+                            "offset": 4109
+                        }
+                    },
+                    "$SINK": {
+                        "abstract_content": "f\"SELECT * FROM admin WHERE username='{username}' AND password='{password}'\"",
+                        "end": {
+                            "col": 98,
+                            "line": 112,
+                            "offset": 4448
+                        },
+                        "start": {
+                            "col": 22,
+                            "line": 112,
+                            "offset": 4372
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "validation_state": "NO_VALIDATOR"
+            },
+            "path": "banking_app/routes.py",
+            "start": {
+                "col": 22,
+                "line": 112,
+                "offset": 4372
+            }
+        },
+        {
+            "check_id": "python.flask.db.generic-sql-flask.generic-sql-flask",
+            "end": {
+                "col": 42,
+                "line": 113,
+                "offset": 4491
+            },
+            "extra": {
+                "dataflow_trace": {
+                    "intermediate_vars": [
+                        {
+                            "content": "username",
+                            "location": {
+                                "end": {
+                                    "col": 17,
+                                    "line": 109,
+                                    "offset": 4253
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 9,
+                                    "line": 109,
+                                    "offset": 4245
+                                }
+                            }
+                        },
+                        {
+                            "content": "query",
+                            "location": {
+                                "end": {
+                                    "col": 14,
+                                    "line": 112,
+                                    "offset": 4364
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 9,
+                                    "line": 112,
+                                    "offset": 4359
+                                }
+                            }
+                        }
+                    ],
+                    "taint_sink": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 42,
+                                    "line": 113,
+                                    "offset": 4491
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 37,
+                                    "line": 113,
+                                    "offset": 4486
+                                }
+                            },
+                            "query"
+                        ]
+                    ],
+                    "taint_source": [
+                        "CliLoc",
+                        [
+                            {
+                                "end": {
+                                    "col": 38,
+                                    "line": 109,
+                                    "offset": 4274
+                                },
+                                "path": "banking_app/routes.py",
+                                "start": {
+                                    "col": 20,
+                                    "line": 109,
+                                    "offset": 4256
+                                }
+                            },
+                            "form.username.data"
+                        ]
+                    ]
+                },
+                "engine_kind": "OSS",
+                "fingerprint": "6c76a71caf0c114c3d3291152eb631906bf56c2a94917a70d54a37d200866347feec8623da3959a4a15e45e5d19235b5a5694c01c2dd365ce8778ccc7003f257_0",
+                "is_ignored": false,
+                "lines": "        result = db.session.execute(query).fetchone()",
+                "message": "Untrusted input might be used to build a database query, which can lead to a SQL injection vulnerability. An attacker can execute malicious SQL statements and gain unauthorized access to sensitive data, modify, delete data, or execute arbitrary system commands. The driver API has the ability to bind parameters to the query in a safe way. Make sure not to dynamically create SQL queries from user-influenced inputs. If you cannot avoid this, either escape the data properly or create an allowlist to check the value.",
+                "metadata": {
+                    "category": "security",
+                    "confidence": "HIGH",
+                    "cwe": [
+                        "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+                    ],
+                    "cwe2020-top25": true,
+                    "cwe2021-top25": true,
+                    "cwe2022-top25": true,
+                    "functional-categories": [
+                        "db::sink::sql-or-nosql-query::aiomysql",
+                        "db::sink::sql-or-nosql-query::aiopg",
+                        "db::sink::sql-or-nosql-query::mysql-connector",
+                        "db::sink::sql-or-nosql-query::mysqldb",
+                        "db::sink::sql-or-nosql-query::pep249",
+                        "db::sink::sql-or-nosql-query::psycopg2",
+                        "db::sink::sql-or-nosql-query::pymssql",
+                        "db::sink::sql-or-nosql-query::pymysql",
+                        "db::sink::sql-or-nosql-query::pyodbc",
+                        "web::source::cookie::flask",
+                        "web::source::form-data::flask",
+                        "web::source::form-data::flask-wtf",
+                        "web::source::form-data::wtforms",
+                        "web::source::header::flask",
+                        "web::source::http-body::flask",
+                        "web::source::http-params::flask",
+                        "web::source::url-path-params::flask"
+                    ],
+                    "impact": "HIGH",
+                    "license": "Copyright 2023 Semgrep, Inc.",
+                    "likelihood": "HIGH",
+                    "owasp": [
+                        "A01:2017 - Injection",
+                        "A03:2021 - Injection"
+                    ],
+                    "references": [
+                        "https://owasp.org/Top10/A03_2021-Injection"
+                    ],
+                    "semgrep.dev": {
+                        "rule": {
+                            "origin": "pro_rules",
+                            "r_id": 116506,
+                            "rule_id": "0oULG2d",
+                            "rv_id": 755442,
+                            "url": "https://semgrep.dev/playground/r/jQTQxrR/python.flask.db.generic-sql-flask.generic-sql-flask",
+                            "version_id": "jQTQxrR"
+                        }
+                    },
+                    "shortlink": "https://sg.run/AbKXQ",
+                    "source": "https://semgrep.dev/r/python.flask.db.generic-sql-flask.generic-sql-flask",
+                    "subcategory": [
+                        "vuln"
+                    ],
+                    "technology": [
+                        "aiomysql",
+                        "aiopg",
+                        "db-api",
+                        "flask",
+                        "flask-wtf",
+                        "mssql",
+                        "mysql",
+                        "mysql-connector",
+                        "mysqldb",
+                        "pep249",
+                        "postgres",
+                        "psycopg2",
+                        "pymssql",
+                        "pymysql",
+                        "pyodbc",
+                        "sql",
+                        "web",
+                        "wtforms"
+                    ],
+                    "vulnerability_class": [
+                        "SQL Injection"
+                    ]
+                },
+                "metavars": {
+                    "$1": {
+                        "abstract_content": "route",
+                        "end": {
+                            "col": 6,
+                            "line": 1,
+                            "offset": 5
+                        },
+                        "start": {
+                            "col": 1,
+                            "line": 1,
+                            "offset": 0
+                        }
+                    },
+                    "$AIOMYSQL_CURSOR": {
+                        "abstract_content": "db.session",
+                        "end": {
+                            "col": 28,
+                            "line": 113,
+                            "offset": 4477
+                        },
+                        "start": {
+                            "col": 18,
+                            "line": 113,
+                            "offset": 4467
+                        }
+                    },
+                    "$APP": {
+                        "abstract_content": "Blueprint('main'__name__)",
+                        "end": {
+                            "col": 38,
+                            "line": 9,
+                            "offset": 354
+                        },
+                        "start": {
+                            "col": 11,
+                            "line": 9,
+                            "offset": 327
+                        }
+                    },
+                    "$FIELD": {
+                        "abstract_content": "username",
+                        "end": {
+                            "col": 33,
+                            "line": 109,
+                            "offset": 4269
+                        },
+                        "start": {
+                            "col": 25,
+                            "line": 109,
+                            "offset": 4261
+                        }
+                    },
+                    "$FORM": {
+                        "abstract_content": "form",
+                        "end": {
+                            "col": 24,
+                            "line": 109,
+                            "offset": 4260
+                        },
+                        "propagated_value": {
+                            "svalue_abstract_content": "AdminLoginForm()",
+                            "svalue_end": {
+                                "col": 28,
+                                "line": 107,
+                                "offset": 4202
+                            },
+                            "svalue_start": {
+                                "col": 12,
+                                "line": 107,
+                                "offset": 4186
+                            }
+                        },
+                        "start": {
+                            "col": 20,
+                            "line": 109,
+                            "offset": 4256
+                        }
+                    },
+                    "$FORMCLASS": {
+                        "abstract_content": "AdminLoginForm",
+                        "end": {
+                            "col": 26,
+                            "line": 107,
+                            "offset": 4200
+                        },
+                        "start": {
+                            "col": 12,
+                            "line": 107,
+                            "offset": 4186
+                        }
+                    },
+                    "$FUNC": {
+                        "abstract_content": "admin_login",
+                        "end": {
+                            "col": 16,
+                            "line": 106,
+                            "offset": 4171
+                        },
+                        "start": {
+                            "col": 5,
+                            "line": 106,
+                            "offset": 4160
+                        }
+                    },
+                    "$ROUTE": {
+                        "abstract_content": "route",
+                        "end": {
+                            "col": 15,
+                            "line": 105,
+                            "offset": 4114
+                        },
+                        "start": {
+                            "col": 10,
+                            "line": 105,
+                            "offset": 4109
+                        }
+                    },
+                    "$SINK": {
+                        "abstract_content": "query",
+                        "end": {
+                            "col": 42,
+                            "line": 113,
+                            "offset": 4491
+                        },
+                        "propagated_value": {
+                            "svalue_abstract_content": "text(f\"SELECT * FROM admin WHERE username='{username}' AND password='{password}'\")",
+                            "svalue_end": {
+                                "col": 99,
+                                "line": 112,
+                                "offset": 4449
+                            },
+                            "svalue_start": {
+                                "col": 17,
+                                "line": 112,
+                                "offset": 4367
+                            }
+                        },
+                        "start": {
+                            "col": 37,
+                            "line": 113,
+                            "offset": 4486
+                        }
+                    }
+                },
+                "severity": "ERROR",
+                "validation_state": "NO_VALIDATOR"
+            },
+            "path": "banking_app/routes.py",
+            "start": {
+                "col": 37,
+                "line": 113,
+                "offset": 4486
+            }
+        }
+    ],
+    "skipped_rules": [],
+    "version": "1.74.0"
+}
