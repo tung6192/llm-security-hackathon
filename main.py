@@ -11,6 +11,7 @@ chat_answers = "chat_answers_history"
 chat_history = "chat_history"
 
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.5)
+st.write("Remember to change func _convert_agent_observation_to_messages from langchain_core.agents:  AgentActionMessageLog => AgentAction")
 
 async def main():
     st.header("Langchain Documentation Helper Bot")
